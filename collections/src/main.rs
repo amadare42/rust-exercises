@@ -23,7 +23,7 @@ fn list_med(list: &[i32]) -> ListResult {
         for v in list {
             sum += *v;
         }
-        sum / len as i32
+        sum / len as i32 // TODO
     };
 
     let median = {
@@ -36,7 +36,7 @@ fn list_med(list: &[i32]) -> ListResult {
     let mode = {
         let mut map = HashMap::new();
         for v in list {
-            *map.entry(v).or_insert(0) += 1;
+            *map.entry(v).or_insert(0) += 1; // NICE
         }
         let mut max: Option<(&i32, &i32)> = None;
         for (key, val) in map.iter() {
@@ -46,12 +46,12 @@ fn list_med(list: &[i32]) -> ListResult {
                         max = Some((key, val))
                     }
                 }
-                None => max = Some((key, val))
+                None => max = Some((key, val)) // FIXME
             }
         }
         match max {
             Some((key, _)) => *key,
-            None => 0
+            None => 0 // FIXME
         }
     };
 
@@ -60,3 +60,5 @@ fn list_med(list: &[i32]) -> ListResult {
 
 #[derive(Debug)]
 struct ListResult { avg: i32, median: i32, mode: i32 }
+
+// TODO: tests
