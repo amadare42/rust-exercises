@@ -1,11 +1,17 @@
+//! Exercising in managing department.
+//!
+//! # Task
+//!
+//! Using a hash map and vectors, create a text interface to allow a user to add
+//! employee names to a department in a company. For example, `Add Sally to
+//! Engineering` or `Add Amir to Sales`. Then let the user retrieve a list of
+//! all people in a department or all people in the company by department,
+//! sorted alphabetically.
+
 use std;
 use std::collections::HashMap;
 
-// TASK: Using a hash map and vectors, create a text interface to allow a user to add employee names to a department in a company. 
-// For example, “Add Sally to Engineering” or “Add Amir to Sales.” 
-// Then let the user retrieve a list of all people in a department or all people in the company by department, sorted alphabetically.
-
-pub fn run() {
+fn main() {
     let mut map: HashMap<String, Vec<String>> = HashMap::new();
 
     loop {
@@ -65,9 +71,9 @@ fn parse_line(line: &str) -> Command {
     }
 
     if state == 2 && !name_parts.is_empty() && !department_parts.is_empty() {
-        Command::AddPerson(AddPersonModel { 
-            name: String::from(name_parts.join(" ")), 
-            department: String::from(department_parts.join(" ")) 
+        Command::AddPerson(AddPersonModel {
+            name: String::from(name_parts.join(" ")),
+            department: String::from(department_parts.join(" "))
         })
     } else {
         Command::Invalid

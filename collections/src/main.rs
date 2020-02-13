@@ -1,10 +1,15 @@
+//! Exercise with collections.
+//!
+//! # Task
+//!
+//! Given a list of integers, use a vector and return the mean (the average
+//! value), median (when sorted, the value in the middle position), and mode
+//! (the value that occurs most often; a hash map will be helpful here) of
+//! the list.
+
 use std::collections::HashMap;
 
-// TASK:: Given a list of integers, use a vector and return the mean (the average value), 
-// median (when sorted, the value in the middle position), 
-// and mode (the value that occurs most often; a hash map will be helpful here) of the list.
-
-pub fn run() {
+fn main() {
     let list = vec![40, 1, 300, 4, 1, 3, 3, 3];
     let result = list_med(&list);
     println!("{:?}", result);
