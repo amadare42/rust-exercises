@@ -1,10 +1,18 @@
+//! Exercise of pig 🐽 latin conversion.
+//!
+//! # Task
+//!
+//! Convert strings to pig latin. The first consonant of each word is moved to
+//! the end of the word and `ay` is added, so `first` becomes `irst-fay`.
+//! Words that start with a vowel have `hay` added to the end instead (`apple`
+//! becomes `apple-hay`).
+//!
+//! Keep in mind the details about UTF-8 encoding!
+
 use std::iter::*;
 use std::str::Chars;
 
-// TASK: Convert strings to pig latin. The first consonant of each word is moved to the end of the word and “ay” is added, so “first” becomes “irst-fay.” 
-// Words that start with a vowel have “hay” added to the end instead (“apple” becomes “apple-hay”). Keep in mind the details about UTF-8 encoding!
-
-pub fn run() {
+fn main() {
     to_pig_latin(&String::from("What should we   do with the drunken sailor? Oh well, nothing I guess. "));
     to_pig_latin(&String::from(" What should we do with the drunken sailor? Oh well, nothing I guess. u o"));
     to_pig_latin(&String::from(" What should we do with the drunken sailor? Oh well, nothing I guess.  "));
