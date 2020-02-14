@@ -8,6 +8,7 @@
 //! the list.
 
 use std::collections::HashMap;
+use std::convert::TryFrom;
 
 fn main() {
     let list = vec![40, 1, 300, 4, 1, 3, 3, 3];
@@ -26,7 +27,10 @@ fn batch_calc(list: &[i32]) -> ListResult {
 fn calc_avg(list: &[i32]) -> i32 {
     if !list.is_empty() {
         let sum = list.iter().fold(0, |acc, x| acc + *x);
-        sum / list.len() as i32 // TODO
+        match i32::try_from(list.len()) {
+            Ok(len) => sum / len,
+            _ => 0,
+        }
     } else {
         0
     }
