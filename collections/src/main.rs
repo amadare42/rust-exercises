@@ -11,54 +11,54 @@ use std::collections::HashMap;
 
 fn main() {
     let list = vec![40, 1, 300, 4, 1, 3, 3, 3];
-    let result = list_med(&list);
+    let result = batch_calc(&list);
     println!("{:?}", result);
 }
 
-fn list_med(list: &[i32]) -> ListResult {
-    let len = list.len();
-
-    let avg = {
-        let mut sum = 0;
-        for v in list {
-            sum += *v;
-        }
-        sum / len as i32 // TODO
-    };
-
-    let median = {
-        let mut sorted = list.to_owned();
-        let idx = len / 2;
-        sorted.sort();
-        sorted[idx]
-    };
-
-    let mode = {
-        let mut map = HashMap::new();
-        for v in list {
-            *map.entry(v).or_insert(0) += 1; // NICE
-        }
-        let mut max: Option<(&i32, &i32)> = None;
-        for (key, val) in map.iter() {
-            match max {
-                Some((_, cval)) => {
-                    if *val > *cval {
-                        max = Some((key, val))
-                    }
-                }
-                None => max = Some((key, val)) // FIXME
-            }
-        }
-        match max {
-            Some((key, _)) => *key,
-            None => 0 // FIXME
-        }
-    };
+fn batch_calc(list: &[i32]) -> ListResult {
+    let avg = calc_avg(list);
+    let median = calc_median(list);
+    let mode = calc_mode(list);
 
     ListResult { avg, median, mode }
 }
 
-#[derive(Debug)]
-struct ListResult { avg: i32, median: i32, mode: i32 }
+fn calc_avg(list: &[i32]) -> i32 {
+    if !list.is_empty() {
+        let sum = list.iter().fold(0, |acc, x| acc + *x);
+        sum / list.len() as i32 // TODO
+    } else {
+        0
+    }
+}
 
-// TODO: tests
+fn calc_median(list: &[i32]) -> i32 {
+    if list.is_empty() {
+        return 0;
+    }
+    let mut sorted = list.to_owned();
+    let idx = list.len() / 2;
+    sorted.sort();
+    sorted[idx]
+}
+
+fn calc_mode(list: &[i32]) -> i32 {
+    let mut map = HashMap::new();
+    for v in list {
+        *map.entry(v).or_insert(0) += 1;
+    }
+    let entry = map.iter().max_by(|(_, x), (_, y)| x.cmp(y));
+    match entry {
+        Some((key, _)) => **key,
+        None => 0,
+    }
+}
+
+#[derive(Debug)]
+struct ListResult {
+    avg: i32,
+    median: i32,
+    mode: i32,
+}
+
+pub mod tests;
