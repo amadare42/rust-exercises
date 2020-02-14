@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod calc_avg {
+mod calc_avg_spec {
     use crate::*;
 
     #[test]
@@ -37,7 +37,7 @@ mod median_spec {
 }
 
 #[cfg(test)]
-mod calc_mode {
+mod calc_mode_spec {
     use crate::*;
 
     #[test]
@@ -56,7 +56,7 @@ mod calc_mode {
 }
 
 #[cfg(test)]
-mod batch_calc {
+mod batch_calc_spec {
     use crate::*;
     #[test]
     fn returns_batch_calc_result() {
